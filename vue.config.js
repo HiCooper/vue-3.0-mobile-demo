@@ -1,6 +1,6 @@
 module.exports = {
     lintOnSave: false,
-    configureWebpack: config => {
+    configureWebpack: () => {
         if (process.env.NODE_ENV === 'production') {
             // 为生产环境修改配置...
             console.log('启动生产环境')
@@ -22,7 +22,7 @@ module.exports = {
                 changOrigin: true
             }
         },
-        before: app => {}
+        before: () => {}
     },
     css: {
         loaderOptions: {
