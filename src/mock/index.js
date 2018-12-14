@@ -1,14 +1,14 @@
 import Mock from 'mockjs'
 
-import articleAPI from './article'
+import AccountAPI from './account'
 
-import {fetchList} from '../api/article'
+import {loginApi} from '../api/account'
 
 Mock.setup({
   timeout: '350-600'
 })
 
 // 文章相关
-Mock.mock(fetchList.url, 'get', articleAPI.getList)
+Mock.mock(loginApi.url, 'post', AccountAPI.loginApi)
 
 export default Mock

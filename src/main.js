@@ -11,6 +11,7 @@ import * as filters from './filters'
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 })
+import './mock'
 
 Vue.use(Cube)
 
