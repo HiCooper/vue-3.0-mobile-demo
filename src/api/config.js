@@ -10,15 +10,13 @@ axios.interceptors.request.use(config => {
   config.headers['X-Token'] = 'token'
   return config
 }, error => {
-  console.log(error)
   return Promise.reject(error)
 })
 
 // respone interceptor
 axios.interceptors.response.use(response => {
-  return response.data
+  return response
 }, error => {
-  console.log('err' + error) // for debug
   return Promise.reject(error)
 })
 

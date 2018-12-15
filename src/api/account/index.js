@@ -1,25 +1,19 @@
 import axios from '../config'
+import Qs from 'qs'
 
 /**
  * 登录
  * @param params
  * @returns {Promise<AxiosResponse<any> | never>}
  */
-export const loginApi = (params) => axios.post('/auth/login', params).then(res => res.data);
-
-/**
- * 登出
- * @param params
- * @returns {Promise<AxiosResponse<any> | never>}
- */
-export const logoutApi = (params) => axios.post('/auth/logout', params).then(res => res.data);
+export const loginApi = (params) => axios.post('/user/login', Qs.stringify(params)).then(res => res.data);
 
 /**
  * 重置密码
  * @param params
  * @returns {Promise<AxiosResponse<any> | never>}
  */
-export const resetPwdApi = (params) => axios.post('/account/reset-pwd', params).then(res => res.data);
+export const resetPwdApi = (params) => axios.post('/user/reset-pwd', params).then(res => res.data);
 
 
 /**
@@ -27,7 +21,7 @@ export const resetPwdApi = (params) => axios.post('/account/reset-pwd', params).
  * @param params
  * @returns {Promise<AxiosResponse<any> | never>}
  */
-export const registerAccountApi = (params) => axios.post('/account/register', params).then(res => res.data);
+export const registerAccountApi = (params) => axios.post('/user/register', params).then(res => res.data);
 
 
 

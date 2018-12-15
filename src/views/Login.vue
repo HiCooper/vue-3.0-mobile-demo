@@ -25,7 +25,7 @@
 <script>
     // @ is an alias to /src
     import {loginApi} from "../api/account";
-
+    import md5 from 'md5'
     export default {
         name: 'login',
         components: {},
@@ -36,7 +36,7 @@
                 // todo 测试用，需删除
                 model: {
                     username: 'admin123',
-                    password: 'admin123',
+                    password: '123456',
                 },
                 schema: {
                     groups: [
@@ -99,10 +99,12 @@
         methods: {
             submitHandler() {
                 const p1 = this.$refs.loginFormRef.validate();
-                debugger
                 if (p1) {
-                    console.log('login begin!')
-                    loginApi(this.model).then(res => {
+                    let params = {
+                        username: this.model.username,
+                        password: md5(this.model.password)
+                    }
+                    loginApi(params).then(res => {
                         console.log(res);
                         if (res.msg === 'SUCCESS') {
                             this.$createToast({
@@ -110,13 +112,15 @@
                                 txt: '登录成功'
                             }).show();
                             sessionStorage.setItem('userInfo', JSON.stringify(res.data));
-                            this.$router.push('/home')
+                            this.$router.push('/')
                         } else {
                             this.$createToast({
                                 time: 1500,
                                 txt: res.msg
                             }).show();
                         }
+                    }).catch(e=>{
+                        console.error(e);
                     })
                 }
 

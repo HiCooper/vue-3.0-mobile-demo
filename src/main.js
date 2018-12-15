@@ -8,14 +8,13 @@ import store from './store'
 import './styles/index.scss'
 
 // 路由规则
-import './pemission'
+// import './pemission'
 
 // 过滤器
 import * as filters from './filters'
 
 // mock 请求
-import './mock'
-
+// import './mock'
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
