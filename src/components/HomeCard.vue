@@ -18,10 +18,10 @@
                 <i class="fa fa-thumbs-o-down" style="color: red" aria-hidden="true"></i>{{data.down}}
             </div>
             <div class="item" @click="goCommonDetail">
-                <i class="fa fa-commenting-o" style="color: #999" aria-hidden="true"></i>
+                <i class="fa fa-commenting-o" style="color: #595aaf" aria-hidden="true"></i>
             </div>
             <div class="item">
-                <i class="fa fa-share-alt" style="color: #999" aria-hidden="true"></i>
+                <i class="fa fa-share-alt" style="color: #ffc107" aria-hidden="true"></i>
             </div>
         </div>
     </div>
