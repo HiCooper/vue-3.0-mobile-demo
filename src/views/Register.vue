@@ -25,7 +25,7 @@
     import {registerAccountApi} from "../api/account";
 
     export default {
-        name: 'home',
+        name: 'Register',
         components: {},
         data() {
             return {
@@ -157,7 +157,7 @@
     .register {
         background-color: #f3f4f5;
         padding: 15px;
-        height: calc(100% - 30px);
+        height: 100%;
 
         .banner {
             font-size: 46px;

@@ -5,6 +5,7 @@
         </div>
         <div class="login-form">
             <cube-form
+                    ref="loginFormRef"
                     :model="model"
                     :schema="schema"
                     :immediate-validate="false"
@@ -32,9 +33,10 @@
             return {
                 validity: {},
                 valid: undefined,
+                // todo 测试用，需删除
                 model: {
-                    username: '',
-                    password: '',
+                    username: 'admin123',
+                    password: 'admin123',
                 },
                 schema: {
                     groups: [
@@ -96,15 +98,18 @@
         },
         methods: {
             submitHandler() {
-                if (this.valid) {
-                    console.log('login success!')
+                const p1 = this.$refs.loginFormRef.validate();
+                debugger
+                if (p1) {
+                    console.log('login begin!')
                     loginApi(this.model).then(res => {
-                        if(res.msg === 'SUCCESS'){
+                        console.log(res);
+                        if (res.msg === 'SUCCESS') {
                             this.$createToast({
                                 time: 1500,
                                 txt: '登录成功'
                             }).show();
-                            sessionStorage.setItem('userInfo',JSON.stringify(res.data));
+                            sessionStorage.setItem('userInfo', JSON.stringify(res.data));
                             this.$router.push('/home')
                         } else {
                             this.$createToast({
@@ -114,6 +119,7 @@
                         }
                     })
                 }
+
             },
             validateHandler(result) {
                 this.valid = result.valid
@@ -128,7 +134,7 @@
     .login {
         background-color: #f3f4f5;
         padding: 15px;
-        height: calc(100% - 30px);
+        height: 100%;
 
         .banner {
             font-size: 46px;
