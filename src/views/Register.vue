@@ -23,6 +23,7 @@
 <script>
     // @ is an alias to /src
     import {registerAccountApi} from "../api/account";
+    import md5 from 'md5'
 
     export default {
         name: 'Register',
@@ -126,14 +127,20 @@
         methods: {
            async submitHandler(e) {
                 e.preventDefault()
-               await registerAccountApi(this.model).then(res => {
+               let params = {
+                   username: this.model.username,
+                   password: md5(this.model.password)
+               };
+               await registerAccountApi(params).then(res => {
                     if (res.msg === 'SUCCESS') {
                         this.$createToast({
                             time: 1500,
                             txt: '注册成功'
                         }).show();
-                        sessionStorage.setItem('userInfo', res.data);
-                        this.$router.push('/home')
+                        sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+                        setTimeout(() => {
+                            this.$router.push('/home');
+                        }, 1000)
                     } else {
                         this.$createToast({
                             time: 1500,

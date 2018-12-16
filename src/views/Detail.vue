@@ -73,7 +73,7 @@
         },
         data() {
             return {
-                id: '',
+                id: this.$route.query.id,
                 data: {
                     id: 1,
                     type: '点子',
@@ -95,7 +95,6 @@
             }
         },
         mounted() {
-            this.id = this.$route.query.id;
             console.log(this.id);
             this.getList();
         },

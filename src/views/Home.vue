@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="header">
-            <span>{{userInfo.nickName}}</span>
+            <router-link :to="{path: '/my-home',query: {id: userInfo.id}} ">{{userInfo.nickName}}</router-link>
             <router-link to="/publish"><i class="fa fa-plus" aria-hidden="true"></i></router-link>
         </div>
         <div class="banner-img">

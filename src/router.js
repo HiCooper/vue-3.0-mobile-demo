@@ -33,6 +33,10 @@ export default new Router({
             path: '/detail',
             name: '查看评论',
             component: () => import('./views/Detail.vue')
+        },{
+            path: '/my-home',
+            name: '我的首页',
+            component: () => import('./views/MyHome.vue')
         },
         {
             path: '/*',

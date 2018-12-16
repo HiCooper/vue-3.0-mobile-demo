@@ -187,3 +187,18 @@ export function deepClone (source) {
   })
   return targetObj
 }
+
+
+/**
+ * 从sessionStorage获取用户信息
+ * @returns {*}
+ */
+export function getUserInfo() {
+    let userInfo = null;
+    try {
+        userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+    } catch (e) {
+        console.error(e);
+    }
+    return userInfo;
+}

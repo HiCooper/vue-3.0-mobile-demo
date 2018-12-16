@@ -1,10 +1,10 @@
 import router from './router'
-
+import {getUserInfo} from './utils'
 
 const whiteList = ['/login', '/register'];// no redirect whitelist
 
 router.beforeEach((to, from, next) => {
-    const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+    const userInfo = getUserInfo();
     if (userInfo) {
         if (to.path === '/login') {
             sessionStorage.clear();
