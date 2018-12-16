@@ -124,25 +124,25 @@
             });
         },
         methods: {
-            submitHandler() {
-                if (this.valid) {
-                    console.log('begin register');
-                    registerAccountApi(this.model).then(res => {
-                        if (res.msg === 'SUCCESS') {
-                            this.$createToast({
-                                time: 1500,
-                                txt: '注册成功'
-                            }).show();
-                            sessionStorage.setItem('userInfo',res.data);
-                            this.$router.push('/home')
-                        } else {
-                            this.$createToast({
-                                time: 1500,
-                                txt: res.msg
-                            }).show()
-                        }
-                    })
-                }
+           async submitHandler(e) {
+                e.preventDefault()
+               await registerAccountApi(this.model).then(res => {
+                    if (res.msg === 'SUCCESS') {
+                        this.$createToast({
+                            time: 1500,
+                            txt: '注册成功'
+                        }).show();
+                        sessionStorage.setItem('userInfo', res.data);
+                        this.$router.push('/home')
+                    } else {
+                        this.$createToast({
+                            time: 1500,
+                            txt: res.msg
+                        }).show()
+                    }
+                }).catch(e => {
+                    console.error(e);
+                })
             },
             validateHandler(result) {
                 this.valid = result.valid

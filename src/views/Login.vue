@@ -26,6 +26,7 @@
     // @ is an alias to /src
     import {loginApi} from "../api/account";
     import md5 from 'md5'
+
     export default {
         name: 'login',
         components: {},
@@ -97,33 +98,32 @@
             }
         },
         methods: {
-            submitHandler() {
-                const p1 = this.$refs.loginFormRef.validate();
-                if (p1) {
-                    let params = {
-                        username: this.model.username,
-                        password: md5(this.model.password)
+            async submitHandler(e) {
+                // 必要 阻止默认事件触发，导致路由跳转异常 # 号前多一个 ？
+                e.preventDefault();
+                let params = {
+                    username: this.model.username,
+                    password: md5(this.model.password)
+                };
+                await loginApi(params).then(res => {
+                    if (res.msg === 'SUCCESS') {
+                        sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+                        this.$createToast({
+                            time: 1000,
+                            txt: '登录成功'
+                        }).show();
+                        setTimeout(() => {
+                            this.$router.push('/home');
+                        }, 1000)
+                    } else {
+                        this.$createToast({
+                            time: 1500,
+                            txt: res.msg
+                        }).show();
                     }
-                    loginApi(params).then(res => {
-                        console.log(res);
-                        if (res.msg === 'SUCCESS') {
-                            this.$createToast({
-                                time: 1500,
-                                txt: '登录成功'
-                            }).show();
-                            sessionStorage.setItem('userInfo', JSON.stringify(res.data));
-                            this.$router.push('/')
-                        } else {
-                            this.$createToast({
-                                time: 1500,
-                                txt: res.msg
-                            }).show();
-                        }
-                    }).catch(e=>{
-                        console.error(e);
-                    })
-                }
-
+                }).catch(e => {
+                    console.error(e);
+                })
             },
             validateHandler(result) {
                 this.valid = result.valid
